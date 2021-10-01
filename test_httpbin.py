@@ -14,7 +14,6 @@ def test_header_ok():
     r = requests.get(url_headers, headers={'One': 'true'})
     assert "OK" == r.reason
     assert r.json()['headers']['One'] == 'true'
-    #assert r.header['one'] == 'true'
 
 
 def test_header_incorrect_request():
@@ -28,12 +27,20 @@ def test_header_incorrect_request():
 def test_status_multiples_code():
     codes = [200, 300, 400, 500]
     url_all_code = "http://httpbin.org/status/" + ",".join(map(str, codes))
-    
     r = requests.get(url_all_code)
     assert r.status_code in codes
 
 
-@pytest.mark.parametrize("request_type", [requests.get, requests.post, requests.put, requests.delete, requests.patch])
+@pytest.mark.parametrize(
+    "request_type",
+    [
+        requests.get,
+        requests.post,
+        requests.put,
+        requests.delete,
+        requests.patch
+    ]
+)
 @pytest.mark.parametrize("code", [200, 300, 400, 500])
 def test_status_code(code, request_type):
     url_all_code = "http://httpbin.org/status/"+str(code)
