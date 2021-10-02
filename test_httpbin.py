@@ -5,7 +5,7 @@ import requests
 
 log = logging.getLogger('urllib3')  # works
 log.setLevel(logging.DEBUG)  # needed
-fh = logging.FileHandler("test.log")
+fh = logging.FileHandler("requests.log")
 log.addHandler(fh)
 
 
