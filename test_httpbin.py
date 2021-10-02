@@ -18,7 +18,7 @@ def test_header_ok():
 
 def test_header_incorrect_request():
     with pytest.raises(requests.exceptions.ConnectionError):
-        res = requests.get(
+        requests.get(
             "http://httpbin.org/headers",
             headers={'Content-Length': '200'}
         )
@@ -43,6 +43,6 @@ def test_status_multiples_code():
 )
 @pytest.mark.parametrize("code", [200, 300, 400, 500])
 def test_status_code(code, request_type):
-    url_all_code = "http://httpbin.org/status/"+str(code)
+    url_all_code = "http://httpbin.org/status/" + str(code)
     r = request_type(url_all_code)
     assert r.status_code == code
